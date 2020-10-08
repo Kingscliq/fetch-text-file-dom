@@ -1,41 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biography</title>
-</head>
-
-
-
-
-
-
-
-<body>
-
-<script>
-
-let determiner = localStorage.getItem('number');
-
-</script>
-
-<h1>Biography</h1>
- 
-<p>Name: <embed src="text/'+determiner+'_name.txt">
-
-<p> <embed src="text/'+determiner+'_bio.txt">   
-
-<p> <image src="images/'+determiner+'_birth.jpg">
-
-<p> <image src="images/'+determiner+'_marriage.jpg">
-
-<p> <image src="images/'+determiner+'_death.jpg">
-
-</body>
-</html> 
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,18 +42,18 @@ Bio
 birth
 <div class="images">
 <p id="birth"> 
-    <img class="birth">
+    <img class="birth" onerror="removeElement(this)">
 </p>
 
 <p id="mge"> 
-    <img class="marriage">
+    <img class="marriage" onerror="removeElement(this)">
 </p>
 
 <p id="death">
-     <img class="death"></img>
+     <img class="death" onerror="removeElement(this)">
     </p>
 </div>
-    <script>
+<script>
 
 // getting the dom elements and assigning variables to them
 
@@ -104,7 +66,9 @@ let death = document.querySelector('.death');
 // Getting the value of number variable from the local storage
 let determiner = localStorage.getItem('number');
 
-window.addEventListener('load', function() {
+        birth.src = `images/${determiner}_birth.jpg`;  
+        marriage.src = `images/${determiner}_marriage.jpg`;  
+        death.src = `images/${determiner}_death.jpg`;
 
     //using fetch to get data from text file
     fetch(`text/${determiner}_name.txt`)
@@ -124,33 +88,18 @@ window.addEventListener('load', function() {
             const bio = document.querySelector('.bio');
             bio.textContent = data;
         })
-    // checking for the value of the variable determiner to determine what to render in the dom
+ 
+       
+// Verify if image Exists and ignore if it doesnt
+function removeElement(image){
+  
+   // Get image parent Element
+   var imageRow = image.parentNode;
 
-    switch(determiner){
-    case '1_211':
-        birth.src = `images/${determiner}_birth.jpg`;  
-        marriage.src = `images/${determiner}_marriage.jpg`;  
-        death.src = `images/${determiner}_death.jpg`;
-        break;
-
-    case '1_212':
-        birth.src = `images/${determiner}_birth.jpg`;   
-        marriage.src = `images/${determiner}_marriage.jpg`;   
-        death.src = `images/${determiner}_death.jpg`
-    break;
-
-    default:
-
-        const msg = document.querySelector('p');
-        msg.style.color = 'red';
-        msg.textContent = 'Sorry no item to display, Please click a button'
-
+   // Remove Image if there is an error displaying the source
+   imageRow.parentNode.removeChild(imageRow);
 }
 
-
-})
-
-
-        </script>
+</script>
 </body>
 </html>
