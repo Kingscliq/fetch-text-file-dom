@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree</title>
+</head>
+<body>
+    <h1>Family Tree</h1>
+
+    <img class="img">
+    <button type="sumbit" id="button1" value='1'>T&oslash;rres Jonsson</button>
+    <button type="sumbit" id="button2" value="1">Marita Larsdotter</button>
+
+    <script>
+    
+        
+        const button1 = document.getElementById('button1');
+        const button2 = document.getElementById('button2')
+
+button1.addEventListener('click', function(e){
+    e.preventDefault()
+    let number = '1_211';
+
+
+    if(number === '1_211'){
+        localStorage.setItem('number', number);
+        window.open('biography.html', '_blank', 'location=yes,height=960,width=1200,scrollbars=yes,status=yes')
+        console.log(number)
+    }
+})
+
+
+// Calling Event for Number 2
+button2.addEventListener('click', function(e){
+    e.preventDefault()
+    let number = '1_212';
+
+    if(number === '1_212'){
+        localStorage.setItem('number', number);
+      
+        window.open('biography.html', '_blank',  'location=yes,height=960,width=1200,scrollbars=yes,status=yes')
+        console.log(number)
+    }
+})
+
+
+
+
+// console.log(location)
+        
+    </script>
+</body>
+</html>
