@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree</title>
+</head>
+<style type="text/css">
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+            #mydiv {
+                position: absolute;
+                left: 0;
+                top: 0px;	
+                /* background: rgba(255, 255, 255, 0.66); */
+                cursor: move;
+            }
+    
+            img:hover{
+                cursor: pointer;
+                }
+    
+            .container {
+                width: 500px;
+                height: 500px;
+                position: absolute;
+    
+            }
+            .row{
+                line-height:0;
+            }
+            /* #sky{
+                width: 700px;
+                height: 700px
+            } */
+    
+            .main{
+                height: 400px;
+                width: 400px;
+                overflow: hidden;
+                background-color: #f46729;
+                position: relative;
+    
+            }
+    
+            .buttons{
+    
+                   position: absolute;
+                   margin-left: 1000px; 
+    
+            }
+    
+    
+    </style>
+<body>
+    <!-- /////////// -->
+
+
+    <div class="main">
+        <div id="mydiv" class="container">
+            <div class="row">
+                <!-- <img src="image/Designed for the future of work.jpg" id="sky" width="500"/> -->
+                <img src="image/imagemap.jpg" id="sky" usemap="#image-map">
+
+<map name="image-map">
+    <area target="_blank" alt="TORRES" title="TORRES" href="" id="button1" coords="776,650,1755,1021" shape="rect">
+    <area target="_blank" alt="MARRIAM" title="MARRIAM" href="" id="button2" coords="2671,659,3637,989" shape="rect">
+    <button type="sumbit" id="button1" value='1'>T&oslash;rres Jonsson</button>
+            <button type="sumbit" id="button2" value="1">Marita Larsdotter</button>
+</map>
+            </div>
+            <!-- <button type="sumbit" id="button1" value='1'>T&oslash;rres Jonsson</button>
+            <button type="sumbit" id="button2" value="1">Marita Larsdotter</button> -->
+        </div>
+        
+        
+    </div>
+    <p class="buttons">
+        <button type="button" onclick="zoomin()">Zoom In</button>
+        <button type="button" onclick="zoomout()"> Zoom Out</button>
+    </p>
+
+
+
+    <!-- ///////////////////////// -->
+
+
+    
+
+    <script>
+    
+      /// Code for Click of a button  
+        const button1 = document.getElementById('button1');
+        const button2 = document.getElementById('button2');
+
+function checkBtn(number){
+    localStorage.setItem('number', number);
+    window.open('biography.html', '_blank', 'location=yes,height=960,width=1200,scrollbars=yes,status=yes')
+    console.log(number )
+}
+//function for button1
+button1.addEventListener('click', (e) =>{
+    e.preventDefault();
+    checkBtn('1_211')
+});
+// function for button 2
+button2.addEventListener('click',(e)=>{
+    e.preventDefault();
+    checkBtn('1_212')
+});
+
+
+//// Code for draggable and zoom Functions
+
+function zoomin(){
+        var myImg = document.getElementById("sky");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 1200){
+            alert("Maximum zoom-in level reached.");
+        } else{
+            myImg.style.width = (currWidth + 50) + "px";
+            myImg.style.height = (currWidth + 50) + "px";
+        } 
+    }
+    function zoomout(){
+        var myImg = document.getElementById("sky");
+        var currWidth = myImg.clientWidth;
+        if(currWidth == 50){
+            alert("Maximum zoom-out level reached.");
+        } else{
+            myImg.style.width = (currWidth - 50) + "px";
+            myImg.style.height = (currWidth - 50) + "px";
+        }
+    }
+
+//Make the DIV element draggagle:
+dragElement(document.getElementById("mydiv"));
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+        
+    </script>
+</body>
+</html>

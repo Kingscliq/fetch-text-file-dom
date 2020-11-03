@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biography</title>
+    <style>
+        .name{
+            font-size: 2rem;
+            font-weight: 600;
+            font-family:Verdana, Geneva, Tahoma, sans-serif
+        }
+        .bio{
+            color: #561287;
+            width: 100%
+        }
+        img{
+            height: 200px;
+            width: auto
+        }
+    </style>
+</head>
+
+
+
+
+
+
+
+<body>
+
+
+
+<h1>Biography</h1>
+
+Name:
+ <p class="name"></p>
+Bio
+<p class="bio"> </p>
+
+
+birth
+<div class="images">
+<p id="birth"> 
+    <img class="birth" onerror="removeElement(this)">
+</p>
+
+<p id="mge"> 
+    <img class="marriage" onerror="removeElement(this)">
+</p>
+
+<p id="death">
+     <img class="death" onerror="removeElement(this)">
+    </p>
+</div>
+
+
+<!-- </script>
+// </head>
+// <body>
+//     <p>
+//         <button type="button" onclick="zoomin()"><img src="/examples/images/zoom-in.png"> Zoom In</button>
+//         <button type="button" onclick="zoomout()"><img src="/examples/images/zoom-out.png"> Zoom Out</button>
+//     </p>
+//     <img src="/examples/images/sky.jpg" id="sky" width="250" alt="Cloudy Sky">
+--> 
+<script>
+
+// getting the dom elements and assigning variables to them
+
+let name = document.querySelector('.name');
+let bio = document.querySelector('.bio');
+let birth = document.querySelector('.birth');
+let marriage = document.querySelector('.marriage');
+let death = document.querySelector('.death');
+
+// Getting the value of number variable from the local storage
+let determiner = localStorage.getItem('number');
+
+        birth.src = `images/${determiner}_birth.jpg`;  
+        marriage.src = `images/${determiner}_marriage.jpg`;  
+        death.src = `images/${determiner}_death.jpg`;
+
+    //using fetch to get data from text file
+    fetch(`text/${determiner}_name.txt`)
+        .then(function(res){
+            return res.text();
+
+        })
+        .then(function(data){
+            const name = document.querySelector('.name');
+            name.textContent = data
+        })
+    fetch(`text/${determiner}_bio.txt`)
+        .then(function(res){
+            return res.text()
+        })
+        .then(function(data){
+            const bio = document.querySelector('.bio');
+            bio.textContent = data;
+        })
+ 
+       
+// Verify if image Exists and ignore if it doesnt
+function removeElement(image){
+  
+   // Get image parent Element
+   var imageRow = image.parentNode;
+
+   // Remove Image if there is an error displaying the source
+   imageRow.parentNode.removeChild(imageRow);
+}
+
+// <style>
+//     button{
+//         padding: 3px 6px;
+//     }
+//     button img{
+//         vertical-align: middle;
+//     }
+// </style>
+// <script>
+//     function zoomin(){
+//         var myImg = document.getElementById("sky");
+//         var currWidth = myImg.clientWidth;
+//         if(currWidth == 500){
+//             alert("Maximum zoom-in level reached.");
+//         } else{
+//             myImg.style.width = (currWidth + 50) + "px";
+//         } 
+//     }
+//     function zoomout(){
+//         var myImg = document.getElementById("sky");
+//         var currWidth = myImg.clientWidth;
+//         if(currWidth == 50){
+//             alert("Maximum zoom-out level reached.");
+//         } else{
+//             myImg.style.width = (currWidth - 50) + "px";
+//         }
+//     }
+// 
+
+</script>
+</body>
+</html>
